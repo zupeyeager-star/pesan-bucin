@@ -9,21 +9,20 @@
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       text-align: center;
-      background-color: #0f172a; /* Warna Background Biru Gelap / Navy */
+      background-color: #0f172a;
       margin: 0;
       padding: 20px 15px;
-      color: #f8fafc; /* Warna Teks Putih Soft */
+      color: #f8fafc;
     }
     h2 {
-      color: #38bdf8; /* Warna Judul Biru Muda Terang */
+      color: #38bdf8;
       margin-bottom: 5px;
     }
     p.sub {
       font-size: 14px;
-      color: #94a3b8; /* Warna Subtitle Abu-biru */
+      color: #94a3b8;
       margin-bottom: 20px;
     }
-    /* Grid 4 Kotak Foto */
     .grid-container {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -50,7 +49,6 @@
     .grid-item:active img {
       transform: scale(1.05);
     }
-    /* Pop-up Modal Detail */
     .modal {
       display: none;
       position: fixed;
@@ -64,7 +62,7 @@
       z-index: 99;
     }
     .modal-content {
-      background: #1e293b; /* Background Pop-up Gelap */
+      background: #1e293b;
       padding: 20px;
       border-radius: 20px;
       max-width: 320px;
@@ -85,12 +83,12 @@
     }
     .modal-content p {
       font-size: 15px;
-      color: #f1f5f9; /* Teks Pesan Putih */
+      color: #f1f5f9;
       line-height: 1.4;
       margin-bottom: 15px;
     }
     .back-btn {
-      background: #0284c7; /* Warna Tombol Biru Cerah */
+      background: #0284c7;
       color: white;
       border: none;
       padding: 10px 24px;
@@ -146,7 +144,6 @@
       document.getElementById('modalImg').src = imgUrl;
       document.getElementById('modalText').innerText = pesan;
       
-      // Putar lagu khusus foto ini
       player.src = laguUrl;
       player.play();
 
@@ -156,7 +153,6 @@
     function kembali() {
       document.getElementById('myModal').style.display = 'none';
       
-      // Matikan lagu pas klik kembali
       player.pause();
       player.currentTime = 0;
     }
@@ -164,5 +160,3 @@
 
 </body>
 </html>
-
-
