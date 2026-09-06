@@ -3,27 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Galeri Interaktif</title>
+  <title>Galeri Spesial</title>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       text-align: center;
-      background-color: #ffe6e8;
+      background-color: #0f172a; /* Warna Background Biru Gelap / Navy */
       margin: 0;
       padding: 20px 15px;
-      color: #333;
+      color: #f8fafc; /* Warna Teks Putih Soft */
     }
     h2 {
-      color: #d63384;
+      color: #38bdf8; /* Warna Judul Biru Muda Terang */
       margin-bottom: 5px;
     }
     p.sub {
       font-size: 14px;
-      color: #666;
+      color: #94a3b8; /* Warna Subtitle Abu-biru */
       margin-bottom: 20px;
     }
-    /* Grid 4 Kotak Gambar */
+    /* Grid 4 Kotak Foto */
     .grid-container {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -35,10 +35,11 @@
       position: relative;
       border-radius: 15px;
       overflow: hidden;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
       cursor: pointer;
       aspect-ratio: 1 / 1;
-      background-color: #ddd;
+      background-color: #1e293b;
+      border: 1px solid #334155;
     }
     .grid-item img {
       width: 100%;
@@ -49,13 +50,13 @@
     .grid-item:active img {
       transform: scale(1.05);
     }
-    /* Pop-up Tampilan Detail */
+    /* Pop-up Modal Detail */
     .modal {
       display: none;
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      background: rgba(0,0,0,0.7);
+      background: rgba(0,0,0,0.8);
       align-items: center;
       justify-content: center;
       padding: 20px;
@@ -63,13 +64,15 @@
       z-index: 99;
     }
     .modal-content {
-      background: white;
+      background: #1e293b; /* Background Pop-up Gelap */
       padding: 20px;
       border-radius: 20px;
       max-width: 320px;
       width: 100%;
       text-align: center;
       animation: pop 0.3s ease;
+      border: 1px solid #334155;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
     }
     @keyframes pop {
       from { transform: scale(0.8); opacity: 0; }
@@ -81,13 +84,13 @@
       margin-bottom: 12px;
     }
     .modal-content p {
-      font-size: 16px;
-      color: #444;
+      font-size: 15px;
+      color: #f1f5f9; /* Teks Pesan Putih */
       line-height: 1.4;
       margin-bottom: 15px;
     }
     .back-btn {
-      background: #ff4d6d;
+      background: #0284c7; /* Warna Tombol Biru Cerah */
       color: white;
       border: none;
       padding: 10px 24px;
@@ -95,36 +98,35 @@
       font-weight: bold;
       font-size: 14px;
       cursor: pointer;
+      box-shadow: 0 4px 10px rgba(2, 132, 199, 0.4);
     }
   </style>
 </head>
 <body>
 
-  <!-- Judul Atas -->
-  <h2>Spesial Buat Kamu 💖</h2>
-  <p class="sub">Pilih salah satu kotak di bawah ya!</p>
+  <h2>Spesial Buat Aruna Cantik Baik Hati Luar Biasa Gacor Mantap Kicau Mania</h2>
+  <p class="sub">Pilih salah satu foto yang mau dikicaukan</p>
 
-  <!-- 4 Kotak Gambar -->
   <div class="grid-container">
-    <!-- Kotak 1 -->
-    <div class="grid-item" onclick="bukaDetail('https://picsum.photos/id/1015/400/400', 'Ini kata-kata buat kotak pertama! Seneng banget bisa kenal kamu ✨', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3')">
-      <img src="https://picsum.photos/id/1015/400/400" alt="Foto 1">
+    
+    <div class="grid-item" onclick="bukaDetail('https://i.postimg.cc/zGFyB39N/IMG-20260906-134747.jpg', 'Satu titik dua koma, Aruna cantik ada yang punya?', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3')">
+      <img src="https://i.postimg.cc/zGFyB39N/IMG-20260906-134747.jpg" alt="Foto 1">
     </div>
-    <!-- Kotak 2 -->
-    <div class="grid-item" onclick="bukaDetail('https://picsum.photos/id/1025/400/400', 'Ini kata-kata buat kotak kedua! Momen ini lucu banget kalau dipikir-pikir 🥺', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3')">
-      <img src="https://picsum.photos/id/1025/400/400" alt="Foto 2">
+
+    <div class="grid-item" onclick="bukaDetail('https://i.postimg.cc/cH8k7q7M/IMG-20260906-134754.jpg', 'Baiknya agak munduran fotonya ini, soalnya cantiknya kelewatan parahh', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3')">
+      <img src="https://i.postimg.cc/cH8k7q7M/IMG-20260906-134754.jpg" alt="Foto 2">
     </div>
-    <!-- Kotak 3 -->
-    <div class="grid-item" onclick="bukaDetail('https://picsum.photos/id/1069/400/400', 'Ini kata-kata buat kotak ketiga! Semangat terus ya, jangan gampang galau ❤️', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3')">
-      <img src="https://picsum.photos/id/1069/400/400" alt="Foto 3">
+
+    <div class="grid-item" onclick="bukaDetail('https://i.postimg.cc/2jL3W0sr/IMG-20260906-134727.jpg', 'Bilang ke saya kalau kirim foto 4 ini ada artinya buat kamu dek', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3')">
+      <img src="https://i.postimg.cc/2jL3W0sr/IMG-20260906-134727.jpg" alt="Foto 3">
     </div>
-    <!-- Kotak 4 -->
-    <div class="grid-item" onclick="bukaDetail('https://picsum.photos/id/1084/400/400', 'Ini kata-kata buat kotak keempat! Pokoknya kamu yang paling favorit titik! 🐱', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3')">
-      <img src="https://picsum.photos/id/1084/400/400" alt="Foto 4">
+
+    <div class="grid-item" onclick="bukaDetail('https://i.postimg.cc/9MKMS9qJ/IMG-20260906-134740.jpg', 'Paling gacor lah ini cantiknya luar biasa konsonan langit bulan bintang aja cemburu liatnya soalnya kalah indah, kalah cemerlang, kalah semuanya. Kamu menang aruna', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3')">
+      <img src="https://i.postimg.cc/9MKMS9qJ/IMG-20260906-134740.jpg" alt="Foto 4">
     </div>
+
   </div>
 
-  <!-- Pop-up Modal Detail -->
   <div id="myModal" class="modal">
     <div class="modal-content">
       <img id="modalImg" src="" alt="Detail Foto">
@@ -133,7 +135,6 @@
     </div>
   </div>
 
-  <!-- Pemutar Musik Otomatis -->
   <audio id="audioPlayer"></audio>
 
   <script>
@@ -142,23 +143,20 @@
     var player = document.getElementById('audioPlayer');
 
     function bukaDetail(imgUrl, pesan, laguUrl) {
-      // Set Gambar & Pesan
       document.getElementById('modalImg').src = imgUrl;
       document.getElementById('modalText').innerText = pesan;
       
-      // Set & Putar Lagu Khusus Kotak Ini
+      // Putar lagu khusus foto ini
       player.src = laguUrl;
       player.play();
 
-      // Tampilkan Pop-up
       document.getElementById('myModal').style.display = 'flex';
     }
 
     function kembali() {
-      // Sembunyikan Pop-up
       document.getElementById('myModal').style.display = 'none';
       
-      // Matikan Lagu Pas Klik Kembali
+      // Matikan lagu pas klik kembali
       player.pause();
       player.currentTime = 0;
     }
