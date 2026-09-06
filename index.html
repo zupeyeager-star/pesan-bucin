@@ -3,55 +3,164 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Buat Aruna</title>
+  <title>Galeri Interaktif</title>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <style>
     body {
-      font-family: sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       text-align: center;
       background-color: #ffe6e8;
-      padding: 30px 15px;
+      margin: 0;
+      padding: 20px 15px;
       color: #333;
     }
-    .card {
-      background: white;
-      padding: 25px 20px;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    h2 {
+      color: #d63384;
+      margin-bottom: 5px;
+    }
+    p.sub {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 20px;
+    }
+    /* Grid 4 Kotak Gambar */
+    .grid-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
       max-width: 350px;
       margin: 0 auto;
     }
-    button {
-      background-color: #ff4d6d;
+    .grid-item {
+      position: relative;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      cursor: pointer;
+      aspect-ratio: 1 / 1;
+      background-color: #ddd;
+    }
+    .grid-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    .grid-item:active img {
+      transform: scale(1.05);
+    }
+    /* Pop-up Tampilan Detail */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.7);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      box-sizing: border-box;
+      z-index: 99;
+    }
+    .modal-content {
+      background: white;
+      padding: 20px;
+      border-radius: 20px;
+      max-width: 320px;
+      width: 100%;
+      text-align: center;
+      animation: pop 0.3s ease;
+    }
+    @keyframes pop {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    .modal-content img {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 12px;
+    }
+    .modal-content p {
+      font-size: 16px;
+      color: #444;
+      line-height: 1.4;
+      margin-bottom: 15px;
+    }
+    .back-btn {
+      background: #ff4d6d;
       color: white;
       border: none;
-      padding: 12px 24px;
-      font-size: 16px;
-      border-radius: 20px;
-      cursor: pointer;
+      padding: 10px 24px;
+      border-radius: 15px;
       font-weight: bold;
-    }
-    #pesan {
-      font-size: 18px;
-      margin-top: 20px;
-      font-weight: 500;
-      line-height: 1.5;
+      font-size: 14px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
 
-  <div class="card">
-    <h2>Ada pesan buat kamu, Aruna 💌</h2>
-    <button onclick="munculkanPesan()">Pencet di sini!</button>
-    <p id="pesan"></p>
+  <!-- Judul Atas -->
+  <h2>Spesial Buat Kamu 💖</h2>
+  <p class="sub">Pilih salah satu kotak di bawah ya!</p>
+
+  <!-- 4 Kotak Gambar -->
+  <div class="grid-container">
+    <!-- Kotak 1 -->
+    <div class="grid-item" onclick="bukaDetail('https://picsum.photos/id/1015/400/400', 'Ini kata-kata buat kotak pertama! Seneng banget bisa kenal kamu ✨', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3')">
+      <img src="https://picsum.photos/id/1015/400/400" alt="Foto 1">
+    </div>
+    <!-- Kotak 2 -->
+    <div class="grid-item" onclick="bukaDetail('https://picsum.photos/id/1025/400/400', 'Ini kata-kata buat kotak kedua! Momen ini lucu banget kalau dipikir-pikir 🥺', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3')">
+      <img src="https://picsum.photos/id/1025/400/400" alt="Foto 2">
+    </div>
+    <!-- Kotak 3 -->
+    <div class="grid-item" onclick="bukaDetail('https://picsum.photos/id/1069/400/400', 'Ini kata-kata buat kotak ketiga! Semangat terus ya, jangan gampang galau ❤️', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3')">
+      <img src="https://picsum.photos/id/1069/400/400" alt="Foto 3">
+    </div>
+    <!-- Kotak 4 -->
+    <div class="grid-item" onclick="bukaDetail('https://picsum.photos/id/1084/400/400', 'Ini kata-kata buat kotak keempat! Pokoknya kamu yang paling favorit titik! 🐱', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3')">
+      <img src="https://picsum.photos/id/1084/400/400" alt="Foto 4">
+    </div>
   </div>
+
+  <!-- Pop-up Modal Detail -->
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <img id="modalImg" src="" alt="Detail Foto">
+      <p id="modalText"></p>
+      <button class="back-btn" onclick="kembali()">⬅️ Kembali</button>
+    </div>
+  </div>
+
+  <!-- Pemutar Musik Otomatis -->
+  <audio id="audioPlayer"></audio>
 
   <script>
     window.Telegram.WebApp.ready();
 
-    function munculkanPesan() {
-      document.getElementById('pesan').innerText = 'Kamu lucu banget';
+    var player = document.getElementById('audioPlayer');
+
+    function bukaDetail(imgUrl, pesan, laguUrl) {
+      // Set Gambar & Pesan
+      document.getElementById('modalImg').src = imgUrl;
+      document.getElementById('modalText').innerText = pesan;
+      
+      // Set & Putar Lagu Khusus Kotak Ini
+      player.src = laguUrl;
+      player.play();
+
+      // Tampilkan Pop-up
+      document.getElementById('myModal').style.display = 'flex';
+    }
+
+    function kembali() {
+      // Sembunyikan Pop-up
+      document.getElementById('myModal').style.display = 'none';
+      
+      // Matikan Lagu Pas Klik Kembali
+      player.pause();
+      player.currentTime = 0;
     }
   </script>
 
